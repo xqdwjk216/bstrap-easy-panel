@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,19 +11,27 @@
 /**
  * Description of model
  *
- * @author hll
+ * @author gavin
  */
-class model {
+class Model {
 
-    function insertMulti($stmts) {
+    public function insertMulti() {
         
     }
 
-    function insert($stmt) {
+    public function insert() {
         
     }
 
-    function delete($stmt) {
+    public function delete() {
+        
+    }
+
+    public function listAll() {
+        
+    }
+
+    public function find() {
         
     }
 

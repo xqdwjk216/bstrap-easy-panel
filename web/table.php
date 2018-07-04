@@ -1,4 +1,4 @@
-<?php include 'header.php'; ?>
+<?php include_once('header.php'); ?>
 <table class="table table-bordered table-condensed">
 	<thead>
         <tr>
@@ -42,4 +42,4 @@
       </ul>
     </nav>
 
-<?php include 'footer.php'; ?>
+<?php Loader::view('footer.php'); ?>

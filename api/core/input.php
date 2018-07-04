@@ -36,6 +36,7 @@ class Input {
         }
         $funcs = explode("|", $func);
         $funcs = array_unique($funcs);
+        $val = "";
         foreach ($funcs as $func) {
             $func = trim($func);
             if (!$func) {

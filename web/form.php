@@ -26,9 +26,9 @@
         $("#pageFormLogin").submit(function (e) {
             e.preventDefault();
             e.stopPropagation();
-           	$.getJSON('/api/login',$(this).serialize(),function(rsp){
-				location.href = "/web/index.html";
-			});
+            $.getJSON('/api/login', $(this).serialize(), function (rsp) {
+                location.href = "/web/index.html";
+            });
             return false;
         })
     })

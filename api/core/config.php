@@ -13,7 +13,7 @@ class Config {
     /**
      * log_path
      */
-    static $log_path = "/Users/hll/logs/bsep";
+    static $log_path = "C:\\Temp\\logs\\bsep";
     static $auto_addslashes = true;
     static $auto_trim = true;
     static $pwd_md5_salt = "sldfjsdf";
@@ -50,7 +50,7 @@ class Config {
     static $mysql_host = "127.0.0.1";
     static $mysql_port = 3306;
     static $mysql_user = "root";
-    static $mysql_password = "abc123456";
+    static $mysql_password = "root";
     static $mysql_db_name = "bsep";
     //是否使用长连接
     static $pdo_attr_persistent = false;

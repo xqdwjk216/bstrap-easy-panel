@@ -37,14 +37,26 @@ class Dbstmt {
         return !$this->pdo_stmt ? array() : $this->pdo_stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function fetchAllAssoc($idx_field = "") {
+    public function fetchAllAssoc($sql, $idx_field = "") {
+        if ($sql) {
+            $this->query($sql);
+        }
         $result = [];
         if (!$this->pdo_stmt) {
             return $result;
         }
+        $set_arr_map = [];
         while ($row = $this->pdo_stmt->fetch(PDO::FETCH_ASSOC)) {
             if ($idx_field && isset($row[$idx_field])) {
-                $result[$row[$idx_field]] = $row;
+                if (!isset($result[$row[$idx_field]])) {
+                    $result[$row[$idx_field]] = $row;
+                } else {
+                    if (!isset($set_arr_map[$row[$idx_field]])) {
+                        $result[$row[$idx_field]] = array($result[$row[$idx_field]]);
+                        $set_arr_map[$row[$idx_field]] = 1;
+                    }
+                    $result[$row[$idx_field]][] = $row;
+                }
             } else {
                 $result[] = $row;
             }
@@ -82,7 +94,7 @@ class Dbstmt {
         return $this;
     }
 
-    private function prepare($sql) {
+    public function prepare($sql) {
         $this->pdo_stmt = $this->pdo_instance->prepare($sql);
         return $this;
     }

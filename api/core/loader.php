@@ -9,17 +9,24 @@
 class Loader {
 
     public static function model($filename) {
-        self::load(dirname(__FILE__) . "/../model/" . $filename . ".php");
-        $className = "Model_" . ucfirst($filename);
+        $file = dirname(__FILE__) . "".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."model".DIRECTORY_SEPARATOR."" . $filename . "_model.php";
+
+        self::load($file);
+        $className = ucfirst($filename)."Model";
         return new $className;
     }
 
     public static function core($filename) {
-        self::load(dirname(__FILE__) . "/" . $filename . ".php");
+        self::load(dirname(__FILE__) . "".DIRECTORY_SEPARATOR."" . $filename . ".php");
     }
 
     public static function api($filename) {
-        self::load(dirname(__FILE__) . "/../" . $filename . ".php");
+        self::load(dirname(__FILE__) . "".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."" . $filename . ".php");
+    }
+
+    public static function view($filename) {
+        $file = dirname(__FILE__) . "".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."web".DIRECTORY_SEPARATOR."" . $filename . ".php";
+        self::load($file);
     }
 
     public static function load($file) {

@@ -9,7 +9,7 @@
 /**
  * Description of db
  *
- * @author hll
+ * @author gavin
  */
 class Db {
 
