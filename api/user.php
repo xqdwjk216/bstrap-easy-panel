@@ -1,36 +1,49 @@
 <?php
 
-include_once "core/api.php";
+class UserApi extends Api
+{
 
-class UserApi extends Api {
+	public function login()
+	{
+		$m = Loader::model("user");
+		$email = Input::request("email", "", "trim");
+		$password = Input::request("password", "", "trim");
 
-    public function index() {
-        
-    }
+		if (!$email || !$password)
+		{
+			$this->errExit(__LINE__, "邮箱和密码不能为空");
+		}
 
-    public function login() {
-        $m = Loader::model("user");
-        $email = Input::request("email", "", "trim");
-        $password = Input::request("password", "", "trim");
+		$user = $m->findByEmail($email);
+		if (!$user || $password != $user['pwd'])
+		{
+			$this->errExit(__LINE__, "邮箱或密码错误");
+		}
 
-        if (!$email || !$password) {
-            $this->errExit(__LINE__, "邮箱和密码不能为空");
-        }
+		$_SESSION = array_merge($_SESSION, $user);
+		$this->succExit();
+	}
 
-        $user = $m->findByEmail($email);
-        if (!$user || $password != $user['pwd']) {
-            $this->errExit(__LINE__, "邮箱或密码错误");
-        }
+	public function delete()
+	{
+		$id = Input::request("id", 0, "intval");
+		Db::init()->query("delete from module where id=$id");
+		$this->succExit();
+	}
 
-        $_SESSION = array_merge($_SESSION, $user);
-        $this->succExit();
-    }
+	public function save()
+	{
+		$param = Input::request();
+		$user = Db::table("user")->cond("id")->field("*")->bindInt("id", intval($param["id"]))->exec()->fetch();
+		$diff = array_diff($param, $user);
+		$rowCount = Db::table("user")->cond("id")->field("*")->bindInt("id", intval($param["id"]))->update($diff);
+		$this->succExit(["rowCount" => $rowCount]);
+	}
 
-    public function logout() {
-        unset($_SESSION['uid']);
-        $this->succExit();
-    }
+	public function logout()
+	{
+		unset($_SESSION['uid']);
+		$this->succExit();
+	}
 
 }
-
-(new UserApi)->display();

@@ -20,6 +20,7 @@
 .panel-body > * > *{
 	border:none;
 	width:100%;
+	text-align: left;
 }
 .page-tab{
 	padding-left:165px;

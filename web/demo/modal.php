@@ -1,4 +1,4 @@
-<?php include 'header.php'; ?>
+<?php include __DIR__.'/../tpl/header.php'; ?>
 <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -43,4 +43,4 @@
       Launch demo modal
     </button>
   </div>
-<?php include 'footer.php'; ?>
+<?php include __DIR__.'/../tpl/footer.php'; ?>

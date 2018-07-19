@@ -6,33 +6,45 @@
  * and open the template in the editor.
  */
 
-class Loader {
+class Loader
+{
 
-    public static function model($filename) {
-        $file = dirname(__FILE__) . "".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."model".DIRECTORY_SEPARATOR."" . $filename . "_model.php";
+	public static function model($filename)
+	{
+		self::load(MODEL_PATH . $filename . "_model.php");
+		$className = ucfirst($filename) . "Model";
+		return new $className;
+	}
 
-        self::load($file);
-        $className = ucfirst($filename)."Model";
-        return new $className;
-    }
+	public static function core($filename)
+	{
+		self::load(CORE_PATH . $filename . ".php");
+		$className = ucfirst($filename);
+		return new $className;
+	}
 
-    public static function core($filename) {
-        self::load(dirname(__FILE__) . "".DIRECTORY_SEPARATOR."" . $filename . ".php");
-    }
+	public static function api($filename)
+	{
+		self::load(API_PATH . $filename . ".php");
+		$className = ucfirst($filename) . "Api";
+		return new $className;
+	}
 
-    public static function api($filename) {
-        self::load(dirname(__FILE__) . "".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."" . $filename . ".php");
-    }
+	public static function view($filename, $data = [])
+	{
+		self::load(WEB_PATH . str_replace("/", DIRECTORY_SEPARATOR, $filename) . ".php", $data);
+	}
 
-    public static function view($filename) {
-        $file = dirname(__FILE__) . "".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."web".DIRECTORY_SEPARATOR."" . $filename . ".php";
-        self::load($file);
-    }
-
-    public static function load($file) {
-        if (file_exists($file)) {
-            include_once $file;
-        }
-    }
+	public static function load($file, $data = [])
+	{
+		if (file_exists($file))
+		{
+			foreach ($data as $key => $val)
+			{
+				${$key} = $val;
+			}
+			include_once $file;
+		}
+	}
 
 }

@@ -8,23 +8,36 @@
 
 class Input {
 
-    public static function get($key, $default = "", $filter = "") {
+    public static function get($key = "", $default = "", $filter = "") {
+        if( !$key ){
+            return $_GET;
+        }
         $val = isset($_GET[$key]) ? $_GET[$key] : $default;
         return self::filter($val, $filter);
     }
 
-    public static function post($key, $default = "", $filter = "") {
+    public static function post($key = "", $default = "", $filter = "") {
+        if( !$key ){
+            return $_POST;
+        }
         $val = isset($_POST[$key]) ? $_POST[$key] : $default;
         return self::filter($val, $filter);
     }
 
-    public static function cookie($key, $default = "", $filter = "") {
+    public static function cookie($key = "", $default = "", $filter = "") {
+        if( !$key ){
+            return $cookie;
+        }
         $val = isset($_COOKIE[$key]) ? $_COOKIE[$key] : $default;
         return self::filter($val, $filter);
     }
 
-    public static function request($key, $default = "", $filter = "") {
-        $val = isset($_REQUEST[$key]) ? $_REQUEST[$key] : $default;
+    public static function request($key = "", $default = "", $filter = "") {
+        $data = array_merge($_GET,$_POST,$_COOKIE);
+        if( !$key ){
+            return $data;
+        }
+        $val = isset($data[$key]) ? $data[$key] : $default;
         return self::filter($val, $filter);
     }
 

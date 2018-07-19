@@ -15,8 +15,5 @@ Log::init();
 include_once "../core/db.php";
 Db::init();
 
-$res = Db::table("user")->cond("email")->field("email,id")->bindStr("email", "gavin.wen@gmail.com")->exec()->fetchCol();
-var_dump($res);
-
-$res = Db::table("user")->cond("id")->field("name,id,email")->bindInt("id", 1)->exec()->fetchAllAssoc("name");
+$res = Db::init()->fetch("select * from user");
 var_dump($res);

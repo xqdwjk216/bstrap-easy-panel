@@ -20,7 +20,7 @@ class PhpTrace {
     var $next_trace = NULL;
     var $prev_trace = NULL;
 
-    public function __construct($trace_file_name, $trace_file_number) {
+    public function __construct($trace_file_name = "", $trace_file_number = 0) {
         $this->trace_file = $trace_file_name;
         $this->trace_file_line = $trace_file_number;
     }
