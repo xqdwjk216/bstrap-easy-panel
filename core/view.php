@@ -53,13 +53,18 @@ class View
 		return $this;
 	}
 
-	public function attr($key, $val = NULL)
+	public function attr()
 	{
-		if (is_null($val))
+		$args = func_get_args();
+		if( empty($args) ){
+			return $this;
+		}
+		$key = $args[0];
+		if (count($args) == 1)
 		{
 			return isset($this->attrs[$key]) ? $this->attrs[$key] : "";
 		}
-		$this->attrs[$key] = $val;
+		$this->attrs[$key] = $args[1];
 		return $this;
 	}
 
@@ -231,7 +236,11 @@ class View
 	}
 
 	public function append($node)
-	{
+	{ 
+		if( !is_object($node)){
+			debug_print_backtrace();
+			exit;
+		}
 		$this->body .= $node->html();
 		return $this;
 	}

@@ -1,6 +1,6 @@
-<?php Loader::view('tpl/header'); ?>
-<?php
-(new WebApi)->menu();
+<?php 
+	Loader::view('tpl/header');
+	Loader::view('tpl/menu');
 ?>
 <div class="page-tab" id="pageTab">
 	<div class="alert alert-warning alert-dismissible fade in" style="display:none" role="alert" id="pageAlert">
@@ -41,7 +41,7 @@
 		$("#pageFormUserEdit").submit(function (e) {
 			e.preventDefault();
 			e.stopPropagation();
-			$.getJSON('/api/user/save', $(this).serialize(), function (rsp) {
+			$.getJSON('/m:user/a:save', $(this).serialize(), function (rsp) {
 				$("#pageAlert .body").text(rsp.errMsg || "未修改");
 				$("#pageAlert").show();
 				if (rsp.data.rowCount) {

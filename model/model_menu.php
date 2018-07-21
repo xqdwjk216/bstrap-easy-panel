@@ -1,6 +1,6 @@
 <?php
 
-class MenuModel extends BaseModel
+class modelMenu
 {
 
 	public function listMenuItem()

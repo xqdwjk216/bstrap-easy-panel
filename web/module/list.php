@@ -1,6 +1,6 @@
-<?php Loader::view('tpl/header'); ?>
-<?php
-(new WebApi)->menu();
+<?php 
+	Loader::view('tpl/header');
+	Loader::view('tpl/menu');
 ?>
 <div class="page-tab" id="pageTab">
 	<?php
@@ -12,10 +12,10 @@
 	echo (new VIew)->setTag("table")->setId("tableId")->setClass("table table-bordered table-condensed")->bindDbStmt($db_stmt)->getBody(function($row, &$tr) {
 		$ajax_url = "/api/module/delete/id:" . $row['ID'];
 		$td = (new View)->setTag("td")->append(
-						(new View)->setTag("a")->setClass("btn btn-primary btn-sm")->attr("href", "http://bsep.viky.studio/api/web/user-edit/id:" . $row['ID'])->setBody("修改")
+						(new View)->setTag("a")->setClass("btn btn-primary btn-sm")->attr("href", "/m:web/v:module-edit/id:" . $row['ID'])->setBody("修改")
 				)
 				->append(
-				(new View)->setTag("a")->setClass("btn btn-danger btn-sm")->attr("href", "/web/m:common/v:confirm/title:删除/content:是否确定删除/ajax_url:" . urlencode($ajax_url))->setBody("删除")
+				(new View)->setTag("a")->setClass("btn btn-danger btn-sm")->attr("href", "/m:web/v:common-confirm/title:删除/content:是否确定删除/ajax_url:" . urlencode($ajax_url))->setBody("删除")
 		);
 		$tr->append($td);
 	})->html();

@@ -14,7 +14,7 @@ class Config
 	/**
 	 * log_path
 	 */
-	static $log_path = "/data/wwwlogs/bsep";
+	static $log_path = "";
 	static $auto_addslashes = true;
 	static $auto_trim = true;
 	static $pwd_md5_salt = "sldfjsdf";
@@ -29,11 +29,6 @@ class Config
 		if (get_magic_quotes_gpc())
 		{
 			self::$auto_addslashes = false;
-		}
-		if (gethostname() == "server-429cd8df-672c-4f3b-a8be-88c847069d19.novalocal")
-		{
-			self::$log_path = "/data/wwwlogs/bsep";
-			self::$mysql_password = "";
 		}
 	}
 
@@ -55,11 +50,11 @@ class Config
 	/**
 	 * mysql config
 	 */
-	static $mysql_host = "192.168.31.242";
+	static $mysql_host = "";
 	static $mysql_port = 3306;
 	static $mysql_user = "root";
 	static $mysql_password = "";
-	static $mysql_db_name = "bsep";
+	static $mysql_db_name = "";
 	//是否使用长连接
 	static $pdo_attr_persistent = false;
 

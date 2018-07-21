@@ -125,6 +125,9 @@ class PhpTrace {
         }
 
         $abs_idx = $idx - $indent;
+        if( !isset($trace_arr[$abs_idx]) ){
+            throw new Exception("Trace error:".print_r($trace_arr,true), __LINE__);
+        }
         $trace = $trace_arr[$abs_idx];
         $traceObj = new PhpTrace($trace['file'], $trace['line']);
         if (isset($trace_arr[$abs_idx + 1])) {

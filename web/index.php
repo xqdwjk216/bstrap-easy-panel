@@ -1,20 +1,10 @@
 <?php
-include_once "../inc.php";
-Loader::core("api");
-Loader::core("dbstmt");
-Loader::core("phptrace");
-Loader::core("config")->init();
-Loader::core("log")->init();
-Loader::core("db")->init();
-Loader::core("input");
-Loader::core("view");
-Loader::model("base");
-Loader::api("web");
+define("IS_WEB",true);
+require_once __DIR__."/../index.php";
 ?>
-
 <?php Loader::view('tpl/header', ['page_title' => 'Test Page']); ?>
 <?php
-(new WebApi)->menu();
+Loader::view('tpl/menu');
 ?>
 <div class="page-tab" id="pageTab">
 	<?php

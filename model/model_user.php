@@ -1,6 +1,6 @@
 <?php
 
-class UserModel extends BaseModel
+class modelUser
 {
 
 	static $user_instance;
@@ -23,17 +23,18 @@ class UserModel extends BaseModel
 
 	public function getCurrentUser()
 	{
-		if (UserModel::$user_instance)
+		if (modelUser::$user_instance)
 		{
-			return UserModel::$user_instance;
+			return modelUser::$user_instance;
 		}
-
+		
+		@session_start();
 		if (empty($_SESSION['email']))
 		{
-			return false;
+			throw new Exception("Login required", 1);
 		}
-		UserModel::$user_instance = $this->findByEmail($_SESSION['email']);
-		return UserModel::$user_instance;
+		modelUser::$user_instance = $this->findByEmail($_SESSION['email']);
+		return modelUser::$user_instance;
 	}
 
 	public function getUserScopeIds()

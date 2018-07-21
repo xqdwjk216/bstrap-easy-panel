@@ -1,3 +1,6 @@
+<?php
+	Loader::view('tpl/header');
+?>
 <div class="panel-group page-menu" id="accordion" role="tablist" aria-multiselectable="true">
 	<?php
 	if (!isset($menu))
@@ -43,3 +46,6 @@
 		</div>
 	<?php } ?>
 </div>
+<?php
+	Loader::view('tpl/footer');
+?>

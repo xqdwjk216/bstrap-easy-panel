@@ -47,7 +47,7 @@ class Log {
     }
 
     public static function flush($msg) {
-        $trace = PhpTrace::getTraceByIndent(-3, __FILE__, __LINE__);    //获取上一层调用信息
+        $trace = PhpTrace::getTraceByIndent(-2, __FILE__, __LINE__);    //获取上一层调用信息
         self::$module = $trace->getTraceFile();
         self::$line = $trace->getTraceFileLine();
         $data = [
@@ -57,7 +57,7 @@ class Log {
             self::$line,
             $msg
         ];
-        file_put_contents(Config::getLogPath() . "." . date("Ymd") . ".log", implode(self::$seperator, $data) . "\n");
+        file_put_contents(Config::getLogPath() . "." . date("Ymd") . ".log", implode(self::$seperator, $data) . "\n",FILE_APPEND);
     }
 
 }

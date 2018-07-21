@@ -28,7 +28,7 @@
 		$("#pageFormLogin").submit(function (e) {
 			e.preventDefault();
 			e.stopPropagation();
-			$.getJSON('/api/user/login', $(this).serialize(), function (rsp) {
+			$.getJSON('/m:user/a:login', $(this).serialize(), function (rsp) {
 				location.href = "/web";
 			});
 			return false;

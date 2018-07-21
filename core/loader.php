@@ -11,8 +11,8 @@ class Loader
 
 	public static function model($filename)
 	{
-		self::load(MODEL_PATH . $filename . "_model.php");
-		$className = ucfirst($filename) . "Model";
+		self::load(MODEL_PATH . "model_".$filename . ".php");
+		$className = "model".ucfirst($filename);
 		return new $className;
 	}
 
@@ -32,7 +32,7 @@ class Loader
 
 	public static function view($filename, $data = [])
 	{
-		self::load(WEB_PATH . str_replace("/", DIRECTORY_SEPARATOR, $filename) . ".php", $data);
+		self::load(VIEW_PATH . str_replace("/", DIRECTORY_SEPARATOR, $filename) . ".php", $data);
 	}
 
 	public static function load($file, $data = [])
